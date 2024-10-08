@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aeroform.Loader", "Aeroform.Loader\Aeroform.Loader.csproj", "{5B3125CC-98AD-46E3-A639-9ECDC388E107}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aeroform.Core", "Aeroform.Core\Aeroform.Core.csproj", "{0BF210FC-96F4-44C5-8EE7-C9D1B4920BBC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aeroform.Unmanaged", "Aeroform.Unmanaged\Aeroform.Unmanaged.csproj", "{EDDDD88A-C877-4115-B007-1B2472001140}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5B3125CC-98AD-46E3-A639-9ECDC388E107}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B3125CC-98AD-46E3-A639-9ECDC388E107}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B3125CC-98AD-46E3-A639-9ECDC388E107}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B3125CC-98AD-46E3-A639-9ECDC388E107}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BF210FC-96F4-44C5-8EE7-C9D1B4920BBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BF210FC-96F4-44C5-8EE7-C9D1B4920BBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BF210FC-96F4-44C5-8EE7-C9D1B4920BBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BF210FC-96F4-44C5-8EE7-C9D1B4920BBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDDDD88A-C877-4115-B007-1B2472001140}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDDDD88A-C877-4115-B007-1B2472001140}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDDDD88A-C877-4115-B007-1B2472001140}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDDDD88A-C877-4115-B007-1B2472001140}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

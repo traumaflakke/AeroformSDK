@@ -1,0 +1,14 @@
+{
+  "name": "API Test",
+  "version": "1.0.0",
+  "description": "This is a test of the Aeroform API",
+  "author": "flakke",
+  "license": "MIT",
+  "xplane_version": "12",
+
+  "settings": {
+    "enable_logging": true,
+    "debug_mode": false,
+    "auto_update": true
+  }
+}

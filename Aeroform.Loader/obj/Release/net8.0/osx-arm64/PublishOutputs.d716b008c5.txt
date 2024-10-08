@@ -1,0 +1,6 @@
+/Users/flakke/Code/_aeroform/Aeroform.Loader/bin/Release/net8.0/osx-arm64/publish/Aeroform.Loader.deps.json
+/Users/flakke/Code/_aeroform/Aeroform.Loader/bin/Release/net8.0/osx-arm64/publish/Aeroform.Loader.runtimeconfig.json
+/Users/flakke/Code/_aeroform/Aeroform.Loader/bin/Release/net8.0/osx-arm64/publish/Aeroform.Loader.pdb
+/Users/flakke/Code/_aeroform/Aeroform.Loader/bin/Release/net8.0/osx-arm64/publish/Aeroform.pdb
+/Users/flakke/Code/_aeroform/Aeroform.Loader/bin/Release/net8.0/osx-arm64/publish/Aeroform.dll
+/Users/flakke/Code/_aeroform/Aeroform.Loader/bin/Release/net8.0/osx-arm64/publish/Aeroform.Loader.dll

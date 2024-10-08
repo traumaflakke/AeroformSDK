@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "MW2c7Mqv/ow=",
+  "success": true,
+  "projectFilePath": "/Users/flakke/Code/_aeroform/Aeroform.Loader/Aeroform.Loader.csproj",
+  "expectedPackageFiles": [
+    "/Users/flakke/.nuget/packages/microsoft.netcore.app.runtime.osx-arm64/8.0.8/microsoft.netcore.app.runtime.osx-arm64.8.0.8.nupkg.sha512",
+    "/Users/flakke/.nuget/packages/microsoft.aspnetcore.app.runtime.osx-arm64/8.0.8/microsoft.aspnetcore.app.runtime.osx-arm64.8.0.8.nupkg.sha512",
+    "/Users/flakke/.nuget/packages/microsoft.netcore.app.crossgen2.osx-arm64/8.0.8/microsoft.netcore.app.crossgen2.osx-arm64.8.0.8.nupkg.sha512"
+  ],
+  "logs": []
+}

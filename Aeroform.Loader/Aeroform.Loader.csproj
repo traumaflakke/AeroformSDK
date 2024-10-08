@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
+
+    <RuntimeIdentifier>osx-arm64</RuntimeIdentifier>
+    <PublishReadyToRun>true</PublishReadyToRun>
+    <PublishReadyToRunShowWarnings>true</PublishReadyToRunShowWarnings>
+    <TieredCompilation>true</TieredCompilation>
+    <TieredCompilationQuickJit>true</TieredCompilationQuickJit>
+    <Optimize>true</Optimize>
+
+    <OutputType>Library</OutputType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <RdXmlFile Include="rd.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Aeroform\Aeroform.csproj" />
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="Publish">
+    <Exec Command="mv $(PublishDir)$(TargetName).dll $(PublishDir)Aeroform.Loader.dll" />
+    <Exec Command="mv $(PublishDir)Aeroform.Loader.dll /Users/flakke/X-Plane\ 12/Resources/plugins/aeroform/64" />
+    <!-- <Exec Command="mv $(PublishDir)Aeroform.runtimeconfig.json /Users/flakke/X-Plane\ 12/Resources/plugins/aeroform/64" /> -->
+    <Exec Command="mv $(PublishDir)Aeroform.Loader.deps.json /Users/flakke/X-Plane\ 12/Resources/plugins/aeroform/64" />
+  </Target>
+</Project>

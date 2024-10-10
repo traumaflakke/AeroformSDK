@@ -19,7 +19,7 @@ public:
 
     void initialize(const std::string& logFilePath);
     void shutdown();
-    void log(const std::string& message, LogLevel level = LogLevel::INFO, bool consoleOutput = true);
+    void log(const std::string& message, LogLevel level = LogLevel::INFO, bool consoleOutput = true, bool isClean = false);
 
     LogManager(const LogManager&) = delete;
     LogManager& operator=(const LogManager&) = delete;

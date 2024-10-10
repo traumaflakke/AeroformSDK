@@ -1,8 +1,6 @@
 #ifndef PLUGIN_MANAGER_H
 #define PLUGIN_MANAGER_H
 
-#include "LibraryManager.h"
-#include "BenchmarkManager.h"
 #include "ConfigManager.h"
 #include "RuntimeManager.h"
 #include "XPLMDefs.h"
@@ -40,8 +38,6 @@ private:
     PluginManager(const PluginManager&) = delete;
     PluginManager& operator=(const PluginManager&) = delete;
 
-    LibraryManager libraryManager;
-    BenchmarkManager benchmarkManager;
     ConfigManager configManager;
     RuntimeManager& runtimeManager;
 };

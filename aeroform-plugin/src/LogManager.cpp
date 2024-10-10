@@ -45,7 +45,7 @@ void LogManager::internalLog(const std::string& message) {
     XPLMDebugString(formattedMessage.c_str());
 }
 
-void LogManager::log(const std::string& message, LogLevel level, bool consoleOutput) {
+void LogManager::log(const std::string& message, LogLevel level, bool consoleOutput, bool isClean) {
     std::lock_guard<std::mutex> lock(logMutex);
     if (!isInitialized.load()) {
         internalLog("LogManager not initialized. Message: " + message);
@@ -58,7 +58,9 @@ void LogManager::log(const std::string& message, LogLevel level, bool consoleOut
 
     std::string formattedMessage = std::string("[AEROFORM] [") + logLevelToString(level) + "] [" + timestamp + "] " + message + "\n";
 
-    if (consoleOutput) {
+    if (isClean) {
+        XPLMDebugString(message.c_str());
+    } else {
         XPLMDebugString(formattedMessage.c_str());
     }
 

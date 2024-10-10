@@ -22,6 +22,9 @@
 #define AEROFORM_VERSION        "0.0.1"
 #define AEROFORM_AUTHOR         "@traumaflakke"
 
+#define AEROFORM_BRIDGE_LIB_FILENAME "Aeroform.Core.dll"
+#define AEROFORM_LOADER_CONFIG_FILENAME "Aeroform.Core.runtimeconfig.json"
+
 #if defined(_WIN32) || defined(_WIN64)
     #define APL 0
     #define IBM 1
@@ -31,7 +34,6 @@
     #define AEROFORM_GET_PROC_ADDRESS    GetProcAddress
     #define AEROFORM_FREE_LIBRARY        FreeLibrary
     #define AEROFORM_PLUGIN_FILENAME     "win.xpl"
-    #define AEROFORM_BRIDGE_LIB_FILENAME "Aeroform.Loader.dll"
 #elif defined(__APPLE__) || defined(__MACH__)
     #define APL 1
     #define IBM 0
@@ -42,7 +44,6 @@
     #define AEROFORM_GET_PROC_ADDRESS    dlsym
     #define AEROFORM_FREE_LIBRARY        dlclose
     #define AEROFORM_PLUGIN_FILENAME     "mac.xpl"
-    #define AEROFORM_BRIDGE_LIB_FILENAME "Aeroform.Loader.dll"
 #elif defined(__linux__) || defined(__unix__)
     #define APL 0
     #define IBM 0
@@ -53,7 +54,6 @@
     #define AEROFORM_GET_PROC_ADDRESS    dlsym
     #define AEROFORM_FREE_LIBRARY        dlclose
     #define AEROFORM_PLUGIN_FILENAME     "lin.xpl"
-    #define AEROFORM_BRIDGE_LIB_FILENAME "Aeroform.Loader.dll"
 #else
     #error "Unsupported platform"
 #endif

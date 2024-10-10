@@ -3,7 +3,6 @@
 #include "PluginManager.h"
 #include "XPLMPlugin.h"
 
-// Удалите глобальную переменную g_pluginManager
 
 PLUGIN_API int XPluginStart(char* outName, char* outSig, char* outDesc) {
     return PluginManager::getInstance().start(outName, outSig, outDesc);

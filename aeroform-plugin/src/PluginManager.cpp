@@ -62,8 +62,8 @@ bool PluginManager::initialize() {
     }
 
     std::string pluginPath = getPluginPath();
-    std::string runtimeConfigPath = pluginPath + "Aeroform.Loader.runtimeconfig.json";
-    std::string dllPath = pluginPath + "Aeroform.Loader.dll";
+    std::string runtimeConfigPath = pluginPath + AEROFORM_LOADER_CONFIG_FILENAME;
+    std::string dllPath = pluginPath + AEROFORM_BRIDGE_LIB_FILENAME;
 
     if (!runtimeManager.initialize(runtimeConfigPath, dllPath)) {
         LogManager::getInstance().log("Failed to initialize RuntimeManager", LogLevel::ERROR);

@@ -11,7 +11,8 @@
 #include <cstdlib>
 #include <cstdio>
 #include <string>
-#include <XPLM/XPLMUtilities.h>
+#include "XPLMUtilities.h"
+
 #ifdef _WIN32
 #include <Windows.h>
 #define STR(s) L ## s
@@ -30,7 +31,7 @@ typedef void (CORECLR_DELEGATE_CALLTYPE* stdout_callback)(const char*, int);
 void redirect_stdout(const char* output, int length)
 {
     std::string outputStr(output, static_cast<std::string::size_type>(length));
-    LogManager::getInstance().log(outputStr, LogLevel::DEBUG);
+    LogManager::getInstance().log(outputStr, LogLevel::INFO, false);
 }
 
 void redirect_trace_output(const char* message) {
@@ -113,13 +114,12 @@ bool RuntimeManager::initialize(const std::string& runtimeConfigPath, const std:
         return false;
     }
 
-    // Устанавливаем перехват вывода консоли
     typedef void (CORECLR_DELEGATE_CALLTYPE* set_stdout_fn)(stdout_callback);
     set_stdout_fn set_stdout = nullptr;
     rc = pImpl->load_assembly_and_get_function_pointer(
         dllPath.c_str(),
-        "Aeroform.Loader, Aeroform.Loader",
-        "RuntimeInterop.SetStdOut",
+        "Aeroform.Core.Legacy.RuntimeInterop, Aeroform.Core",
+        "SetStdOut",
         UNMANAGEDCALLERSONLY_METHOD,
         nullptr,
         reinterpret_cast<void**>(&set_stdout));
@@ -132,8 +132,10 @@ bool RuntimeManager::initialize(const std::string& runtimeConfigPath, const std:
 
     set_stdout(redirect_stdout);
 
+    LogManager::getInstance().log("StdOut redirect success", LogLevel::DEBUG);
+
     // Вызываем Initialize
-    const char* type_name = "Aeroform.Loader.Main, Aeroform.Loader";
+    const char* type_name = "Aeroform.Core.Legacy.Bootstrap, Aeroform.Core";
     const char* method_name = "Initialize";
     
     void* function_pointer = nullptr;

@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aeroform.Core", "Aeroform.C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aeroform.Unmanaged", "Aeroform.Unmanaged\Aeroform.Unmanaged.csproj", "{EDDDD88A-C877-4115-B007-1B2472001140}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aeroform.Common", "Aeroform.Common\Aeroform.Common.csproj", "{D0C412B0-8A82-48A7-998B-48EBFFF5731D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{EDDDD88A-C877-4115-B007-1B2472001140}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EDDDD88A-C877-4115-B007-1B2472001140}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EDDDD88A-C877-4115-B007-1B2472001140}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0C412B0-8A82-48A7-998B-48EBFFF5731D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0C412B0-8A82-48A7-998B-48EBFFF5731D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0C412B0-8A82-48A7-998B-48EBFFF5731D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0C412B0-8A82-48A7-998B-48EBFFF5731D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

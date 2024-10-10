@@ -11,7 +11,7 @@
 #include <cstdlib>
 #include <cstdio>
 #include <string>
-
+#include <XPLM/XPLMUtilities.h>
 #ifdef _WIN32
 #include <Windows.h>
 #define STR(s) L ## s
@@ -25,6 +25,13 @@
 #endif
 
 using string_t = std::basic_string<char_t>;
+typedef void (CORECLR_DELEGATE_CALLTYPE* stdout_callback)(const char*, int);
+
+void redirect_stdout(const char* output, int length)
+{
+    std::string outputStr(output, static_cast<std::string::size_type>(length));
+    LogManager::getInstance().log(outputStr, LogLevel::DEBUG);
+}
 
 void redirect_trace_output(const char* message) {
     std::string msg(message);
@@ -105,6 +112,25 @@ bool RuntimeManager::initialize(const std::string& runtimeConfigPath, const std:
         pImpl->close_fptr(cxt);
         return false;
     }
+
+    // Устанавливаем перехват вывода консоли
+    typedef void (CORECLR_DELEGATE_CALLTYPE* set_stdout_fn)(stdout_callback);
+    set_stdout_fn set_stdout = nullptr;
+    rc = pImpl->load_assembly_and_get_function_pointer(
+        dllPath.c_str(),
+        "Aeroform.Loader, Aeroform.Loader",
+        "RuntimeInterop.SetStdOut",
+        UNMANAGEDCALLERSONLY_METHOD,
+        nullptr,
+        reinterpret_cast<void**>(&set_stdout));
+
+    if (rc != 0 || set_stdout == nullptr) {
+        LogManager::getInstance().log("Failed to get SetStdOut function. Error code: " + std::to_string(rc), LogLevel::ERROR);
+        pImpl->close_fptr(cxt);
+        return false;
+    }
+
+    set_stdout(redirect_stdout);
 
     // Вызываем Initialize
     const char* type_name = "Aeroform.Loader.Main, Aeroform.Loader";

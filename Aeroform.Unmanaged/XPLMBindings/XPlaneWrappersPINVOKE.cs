@@ -9,12 +9,16 @@
 //------------------------------------------------------------------------------
 
 using Aeroform.Unmanaged;
+using Aeroform.Common;
+using Aeroform.Common.Interfaces;
 
 namespace Aeroform.Unmanaged.XPLMBindings {
 
 class XPlaneWrappersPINVOKE {
 
   protected class SWIGExceptionHelper {
+
+    private static ILogger logger = LoggerFactory.GetLogger();
 
     public delegate void ExceptionDelegate(string message);
     public delegate void ExceptionArgumentDelegate(string message, string paramName);
@@ -57,11 +61,11 @@ class XPlaneWrappersPINVOKE {
 
     private static void LogException(string exceptionType, string message, string stackTrace = null)
     {
-        Aeroform.Core.Logger.Log($"SWIG Exception: {exceptionType}");
-        Aeroform.Core.Logger.Log($"Message: {message}");
+        logger.Log($"SWIG Exception: {exceptionType}");
+        logger.Log($"Message: {message}");
         if (!string.IsNullOrEmpty(stackTrace))
         {
-            Aeroform.Core.Logger.Log($"StackTrace: {stackTrace}");
+            logger.Log($"StackTrace: {stackTrace}");
         }
     }
 
@@ -129,8 +133,8 @@ class XPlaneWrappersPINVOKE {
 
     static SWIGExceptionHelper() {
       try {
-            Aeroform.Core.Logger.Log("Initializing SWIGExceptionHelper");
-            Aeroform.Core.Logger.Log("Registering exception callbacks");
+            logger.Log("Initializing SWIGExceptionHelper");
+            logger.Log("Registering exception callbacks");
 
       SWIGRegisterExceptionCallbacks_XPlaneWrappers(
                                 applicationDelegate,
@@ -145,18 +149,18 @@ class XPlaneWrappersPINVOKE {
                                 overflowDelegate,
                                 systemDelegate);
 
-            Aeroform.Core.Logger.Log("Registering exception argument callbacks");
+            logger.Log("Registering exception argument callbacks");
             SWIGRegisterExceptionCallbacksArgument_XPlaneWrappers(
                                 argumentDelegate,
                                 argumentNullDelegate,
                                 argumentOutOfRangeDelegate);
 
-            Aeroform.Core.Logger.Log("SWIGExceptionHelper initialized successfully");
+            logger.Log("SWIGExceptionHelper initialized successfully");
       }
       catch (Exception e)
       {
-          Aeroform.Core.Logger.Log($"Error initializing SWIGExceptionHelper: {e.GetType().Name}: {e.Message}");
-          Aeroform.Core.Logger.Log($"StackTrace: {e.StackTrace}");
+          logger.Log($"Error initializing SWIGExceptionHelper: {e.GetType().Name}: {e.Message}");
+          logger.Log($"StackTrace: {e.StackTrace}");
       }
     }
   }
@@ -180,25 +184,29 @@ class XPlaneWrappersPINVOKE {
     }
 
     public static void Set(global::System.Exception e) {
+      var logger = LoggerFactory.GetLogger();
+
       if (pendingException != null) {
-        Aeroform.Core.Logger.Log($"FATAL: An earlier pending exception from unmanaged code was missed and thus not thrown ({pendingException})");
-        Aeroform.Core.Logger.Log($"New exception: {e}");
+        logger.Log($"FATAL: An earlier pending exception from unmanaged code was missed and thus not thrown ({pendingException})");
+        logger.Log($"New exception: {e}");
         throw new global::System.ApplicationException("FATAL: An earlier pending exception from unmanaged code was missed and thus not thrown (" + pendingException.ToString() + ")", e);
       }
       pendingException = e;
-      Aeroform.Core.Logger.Log($"Setting pending exception: {e.GetType().Name}: {e.Message}");
+      logger.Log($"Setting pending exception: {e.GetType().Name}: {e.Message}");
       lock(exceptionsLock) {
         numExceptionsPending++;
       }
     }
 
     public static global::System.Exception Retrieve() {
+      var logger = LoggerFactory.GetLogger();
+
       global::System.Exception e = null;
       if (numExceptionsPending > 0) {
         if (pendingException != null) {
           e = pendingException;
           pendingException = null;
-          Aeroform.Core.Logger.Log($"Retrieved pending exception: {e.GetType().Name}: {e.Message}");
+          logger.Log($"Retrieved pending exception: {e.GetType().Name}: {e.Message}");
           lock(exceptionsLock) {
             numExceptionsPending--;
           }
@@ -239,14 +247,16 @@ class XPlaneWrappersPINVOKE {
 
   private static T InvokeAndHandleExceptions<T>(Func<T> action, string methodName)
   {
+      var logger = LoggerFactory.GetLogger();
+
       try
       {
           return action();
       }
       catch (Exception ex)
       {
-          Aeroform.Core.Logger.Log($"Exception in {methodName}: {ex.GetType().Name}: {ex.Message}");
-          Aeroform.Core.Logger.Log($"StackTrace: {ex.StackTrace}");
+          logger.Log($"Exception in {methodName}: {ex.GetType().Name}: {ex.Message}");
+          logger.Log($"StackTrace: {ex.StackTrace}");
           throw;
       }
   }

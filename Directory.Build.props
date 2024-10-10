@@ -1,0 +1,27 @@
+<Project>
+  <PropertyGroup>
+    <Version>1.0.0.0</Version>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
+    <RuntimeIdentifier>osx-arm64</RuntimeIdentifier>
+    <OutputType>Library</OutputType>
+    <BaseOutputPath>$(SolutionDir)bin\$(Configuration)</BaseOutputPath>
+    <BaseIntermediateOutputPath>$(SolutionDir)obj\$(MSBuildProjectName)</BaseIntermediateOutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <RdXmlFile Include="$(MSBuildProjectDirectory)\rd.xml" Condition="Exists('$(MSBuildProjectDirectory)\rd.xml')" />
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="Publish">
+    <Exec Command="mv $(PublishDir)$(TargetName).dll $(PublishDir)$(MSBuildProjectName).dll" />
+    <Exec Command="mv $(PublishDir)$(MSBuildProjectName).dll /Users/flakke/X-Plane\ 12/Resources/plugins/aeroform/64" />
+    <Exec Command="mv $(PublishDir)$(MSBuildProjectName).runtimeconfig.json /Users/flakke/X-Plane\ 12/Resources/plugins/aeroform/64" Condition="Exists('$(PublishDir)$(MSBuildProjectName).runtimeconfig.json')" />
+    <Exec Command="mv $(PublishDir)$(MSBuildProjectName).deps.json /Users/flakke/X-Plane\ 12/Resources/plugins/aeroform/64" Condition="Exists('$(PublishDir)$(MSBuildProjectName).deps.json')" />
+  </Target>
+</Project>

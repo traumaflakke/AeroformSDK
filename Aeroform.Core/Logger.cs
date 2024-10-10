@@ -1,36 +1,22 @@
-using Aeroform.Unmanaged.XPLMBindings;
+using Aeroform.Common.Interfaces;
 
-namespace Aeroform.Core;
-
-public enum LogLevel
+namespace Aeroform.Core
 {
-    Info,
-    Warning,
-    Error,
-    Debug
-}
-
-public class Logger
-{
-    private static string logFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "aeroform.log");
-
-    private static string GetLogLevelString(LogLevel level) {
-        return level switch {
-            LogLevel.Info => "INFO",
-            LogLevel.Warning => "WARNING",
-            LogLevel.Error => "ERROR",
-            LogLevel.Debug => "DEBUG",
-            _ => "UNKNOWN"
-        };
-    }
-
-    public static void Log(string message, LogLevel level = LogLevel.Info)
+    public class Logger : ILogger
     {
-        try {
-            XPlaneWrappers.XPLMDebugString($"[Aeroform.Core] [{GetLogLevelString(level)}] {message}{Environment.NewLine}");
-            File.AppendAllText(logFilePath, $"[Aeroform.Core] [{GetLogLevelString(level)}] {message}{Environment.NewLine}");
-        } catch (Exception e) {
-            File.AppendAllText(logFilePath, $"[Aeroform.Core] [{GetLogLevelString(level)}] {message}{Environment.NewLine}");
+        private readonly IXPlaneDebug xplaneDebug;
+        private static string logFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "aeroform.log");
+
+        public Logger(IXPlaneDebug xplaneDebug)
+        {
+            this.xplaneDebug = xplaneDebug;
+        }
+
+        public void Log(string message, LogLevel level = LogLevel.Info)
+        {
+            string logMessage = $"[AEROFORM.Core] [{level}] -> {message}";
+            xplaneDebug.DebugString(logMessage + Environment.NewLine);
+            File.AppendAllText(logFilePath, logMessage + Environment.NewLine);
         }
     }
 }

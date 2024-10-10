@@ -4,8 +4,8 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
   </PropertyGroup>
-
+  
   <ItemGroup>
-    <ProjectReference Include="..\Aeroform.Common\Aeroform.Common.csproj" />
+    <RdXmlFile Include="rd.xml" />
   </ItemGroup>
 </Project>
